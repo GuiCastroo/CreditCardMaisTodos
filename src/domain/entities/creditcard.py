@@ -1,10 +1,11 @@
 from src.domain.value_objects.cvv import Cvv
 from creditcard import CreditCard as CreditCardNumber
+from src.domain.value_objects.expiration_date import ExpirationDate
 from cryptography.fernet import Fernet
 
 
 class CreditCard:
-    def __init__(self, exp_date, holder, credit_card_number: CreditCardNumber, cvv: Cvv):
+    def __init__(self, exp_date: ExpirationDate, holder: str, credit_card_number: CreditCardNumber, cvv: Cvv):
         self._exp_date = exp_date
         self._holder = holder
         self.__credit_card_number = credit_card_number
