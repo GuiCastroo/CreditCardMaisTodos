@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "creditcard"
+version = "0.1.0"
+description = ""
+authors = ["GuiCastroo <gscastroo15@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pydantic = "^2.4.2"
+cryptography = "^41.0.5"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
