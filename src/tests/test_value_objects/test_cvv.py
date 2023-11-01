@@ -4,21 +4,21 @@ from pydantic.error_wrappers import ValidationError
 
 
 class TestCvv(unittest.TestCase):
-    def test_cvv_given_values_when_between_three_and_for_then_create_value_object(self):
-        list_data = [3, 4]
-        for valor in list_data:
-            with self.subTest(valor=valor):
-                data_with_three = Cvv(value=valor)
-                exp = valor
-                result = data_with_three.value
+    def test_cvv_given_values_when_between_100_and_9999_then_create_value_object(self):
+        valid_values = [100, 999, 1000, 9999]
+        for value in valid_values:
+            with self.subTest(value=value):
+                data = Cvv(value=value)
+                exp = value
+                result = data.value
                 self.assertEqual(exp, result)
 
-    def test_cvv_given_values_when_is_different_three_and_for_then_not_create_value_object(self):
-        list_data = [1, 2, 5, 6, 7, -2, -4, -5, 100]
-        for valor in list_data:
-            with self.subTest(valor=valor):
+    def test_cvv_given_values_when_not_between_100_and_9999_then_raise_validation_error(self):
+        invalid_values = [1, 99, 10000, 100000, -100, -99]
+        for value in invalid_values:
+            with self.subTest(value=value):
                 with self.assertRaises(ValidationError):
-                    Cvv(value=valor)
+                    Cvv(value=value)
 
-
-
+if __name__ == '__main__':
+    unittest.main()

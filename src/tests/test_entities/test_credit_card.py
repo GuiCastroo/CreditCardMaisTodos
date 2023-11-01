@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import Mock
-from src.domain.entities.creditcard import CreditCard
+from src.domain.entities.credit_card import CreditCard
 
 
 class TestCreditCard(unittest.TestCase):
