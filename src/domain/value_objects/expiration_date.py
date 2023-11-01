@@ -3,12 +3,12 @@ from pydantic import BaseModel, Field, field_validator
 
 
 class ExpirationDate(BaseModel):
-    exp_date: str = Field(..., description="Expiration date in the format 'yyyy-MM'")
+    exp_date: str = Field(..., description="Expiration date in the format 'MM-yyy'")
 
     @field_validator("exp_date")
     def validate_exp_date(cls, value):
         try:
-            year, month = value.split("-")
+            month, year = value.split("/")
             year = int(year)
             month = int(month)
             last_day_of_month = (date(year, month % 12 + 1, 1) - timedelta(days=1)).day
