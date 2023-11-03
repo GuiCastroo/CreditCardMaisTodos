@@ -10,11 +10,11 @@ services:
     ports:
       - "5432:5432"
   web:
-    build: /Users/gscastro/projetos/creditcard
+    build: ./creditcard
     container_name: fastapi_app
     command: ["poetry", "run", "uvicorn", "src.adapters.inbound.rest.main:app", "--host", "0.0.0.0", "--port", "8000"]
     volumes:
-      - /Users/gscastro/projetos/creditcard
+      - ./creditcard
     ports:
       - "8000:8000"
     depends_on:

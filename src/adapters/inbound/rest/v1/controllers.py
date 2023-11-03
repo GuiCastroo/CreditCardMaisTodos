@@ -18,8 +18,15 @@ credit_card_route = APIRouter(
 )
 
 
-@credit_card_route.get("/{identification}")
-async def get_one_credit_card(identification, repo: CreditCardRepository = Depends(get_credit_card_repository)):
+@credit_card_route.get(
+    "/{identification}",
+    status_code=HTTPStatus.OK,
+    description="Get only credit card, filter by id that generation in created"
+)
+async def get_one_credit_card(
+        identification,
+        repo: CreditCardRepository = Depends(get_credit_card_repository)
+) -> CreateNewCreditCardDTOOut:
     result = await GetOneCreditCardUseCase(repo).get(identification)
     if result:
         return result
@@ -27,13 +34,15 @@ async def get_one_credit_card(identification, repo: CreditCardRepository = Depen
     raise HTTPException(status_code=HTTPStatus.NO_CONTENT, detail=jsonable_encoder({'message': "Not found this id"}))
 
 
-@credit_card_route.get("/")
-async def get_all_credit_card(repo: CreditCardRepository = Depends(get_credit_card_repository)) -> Page:
+@credit_card_route.get("/", description="Get all credit card")
+async def get_all_credit_card(
+        repo: CreditCardRepository = Depends(get_credit_card_repository)
+) -> Page[CreateNewCreditCardDTOOut]:
     result = await GetAllCreditCardUseCase(repo).get_all()
     return result
 
 
-@credit_card_route.post("/", status_code=HTTPStatus.CREATED)
+@credit_card_route.post("/", status_code=HTTPStatus.CREATED, description="Created a new credit card")
 async def create_credit_card(
         body: CreateNewCreditCardDTOIn,
         repo: CreditCardRepository = Depends(get_credit_card_repository)
