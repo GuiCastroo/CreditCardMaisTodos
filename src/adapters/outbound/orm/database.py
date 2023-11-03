@@ -2,6 +2,7 @@ from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.pool import NullPool
 
+
 user = "admin"
 password = "admin"
 host = "localhost"
@@ -10,16 +11,16 @@ database = "credicard"
 
 db_url = f"postgresql+asyncpg://{user}:{password}@{host}:{port}/{database}"
 
-engine = create_async_engine(db_url)
+engine = create_async_engine(db_url, poolclass=NullPool, echo=False)
 
-SESSION = sessionmaker(
-    engine=engine,
-    expire_on_commit=False,
+Session = sessionmaker(
+    engine,
     class_=AsyncSession,
-    future=True,
-    echo=True,
-    poolclass=NullPool
+    expire_on_commit=False,
+
 )
 
 
-
+async def get_db() -> AsyncSession:
+    async with Session() as session:
+        yield session
