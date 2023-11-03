@@ -40,7 +40,7 @@ class CreditCard:
         return self.__credit_card_number.get_brand()
 
     def verify_credit_card_number(self):
-        return self.__credit_card_number.number.is_valid()
+        return self.__credit_card_number.is_valid()
 
     def get_credit_card_number(self):
         encryption_key = Fernet.generate_key()

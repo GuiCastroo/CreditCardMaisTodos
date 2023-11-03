@@ -14,6 +14,7 @@ sqlalchemy = "^2.0.22"
 uvicorn = "^0.23.2"
 asyncpg = "^0.28.0"
 fastapi-pagination = "^0.12.12"
+httpx = "^0.25.1"
 
 
 [build-system]
