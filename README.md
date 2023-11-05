@@ -4,12 +4,31 @@
 Este é um projeto que tem o propósito de armazenar informações de cartões em um banco de dados, permitindo que você as acesse posteriormente.
 ## Configuração
 
+#### Configuração das Variáveis de Ambiente
+
+Antes de executar o projeto, você precisará configurar as seguintes variáveis de ambiente:
+
+- `DB_URL`: URL de conexão com o banco de dados PostgreSQL.
+- `SECRET_KEY`: Chave secreta para segurança da aplicação.
+- `ALGORITHM`: Algoritmo para geração de tokens de autenticação.
+- `ACCESS_TOKEN_EXPIRE_MINUTES`: Tempo de expiração dos tokens de acesso.
+- `DB_URL_ALEMBIC`: URL de conexão com o banco de dados PostgreSQL para Alembic.
+
+
 #### Instale as Dependências
 
 Use Poetry para instalar as dependências do projeto:
 
 ```shell
 poetry install
+```
+Este projeto requer a instalação do pacote `python-creditcard`. No entanto, devido a problemas de compatibilidade com o Poetry devemos fazer isso pelo pip, certifique-se de que esta biblioteca esteja incluída no seu Dockerfile também.
+
+
+Você pode fazer isso usando o seguinte comando:
+
+```bash
+pip install python-creditcard
 ```
 
 #### Execute o Servidor de Desenvolvimento
@@ -122,10 +141,10 @@ Aqui tentamos separa as camadas da aplicação, para ficar fácil as mudanças
 
 ## Referência
 
- - [Awesome Readme Templates](https://awesomeopensource.com/project/elangosundar/awesome-README-templates)
- - [Awesome README](https://github.com/matiassingers/awesome-readme)
- - [How to write a Good readme](https://bulldogjob.com/news/449-how-to-write-a-good-readme-for-your-github-project)
-
+ - [FastApi](https://fastapi.tiangolo.com/)
+ - [Sqlalchemy](https://www.sqlalchemy.org/)
+ - [Netflix using hexagonal architecture](https://netflixtechblog.com/ready-for-changes-with-hexagonal-architecture-b315ec967749)
+ - [Livro sobre DDD em python](https://www.cosmicpython.com/)
 
 ## Contribuindo
 
