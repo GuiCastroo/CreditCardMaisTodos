@@ -10,12 +10,16 @@ services:
     ports:
       - "5432:5432"
   web:
-    build: ./creditcard
+    build: /app
     container_name: fastapi_app
-    command: ["poetry", "run", "uvicorn", "src.adapters.inbound.rest.main:app", "--host", "0.0.0.0", "--port", "8000"]
     volumes:
-      - ./creditcard
+      - /app/data
     ports:
       - "8000:8000"
     depends_on:
       - postgres
+  config-db:
+    container_name: fastapi_app
+    command: [ "poetry", "run", "alembic", "upgrade", "head" ]
+    depends_on:
+      - web

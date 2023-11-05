@@ -1,9 +1,10 @@
-from sqlalchemy.orm import declarative_base
-from sqlalchemy import Column, Integer, String, DateTime
-from sqlalchemy.dialects.postgresql import BYTEA
-from src.adapters.outbound.orm.database import engine
 from asyncio import run
 
+from sqlalchemy import Column, Integer, String, DateTime
+from sqlalchemy.dialects.postgresql import BYTEA
+from sqlalchemy.orm import declarative_base
+
+from src.adapters.outbound.orm.database import engine
 
 BASE = declarative_base()
 
@@ -17,6 +18,13 @@ class CreditCardModel(BASE):
     credit_card_number = Column(BYTEA)
     cvv = Column(Integer)
     brand = Column(String)
+
+
+class UserModel(BASE):
+    __tablename__ = "users"
+    id = Column(Integer, primary_key=True, index=True)
+    username = Column(String, unique=True, index=True)
+    password = Column(String)
 
 
 async def create_database():
